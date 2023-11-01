@@ -18,18 +18,18 @@ export function RegistroRuta() {
           <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>Paradero</Text>
           <Text style={{ textAlign: 'center' }}>Pte Atocongo</Text>
           <Text style={{ textAlign: 'center' }}>Primavera</Text>
-          <Text style={{ textAlign: 'center' }}>Pte Santa Anita</Text>
+          <Text style={{ textAlign: 'center' }}>Perales</Text>
           <Text style={{ textAlign: 'center' }}>Pte Nuevo</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>Hora Esperada</Text>
+          <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>Hora esperada</Text>
           <Text style={{ textAlign: 'center' }}>08:05</Text>
           <Text style={{ textAlign: 'center' }}>08:35</Text>
           <Text style={{ textAlign: 'center' }}>09:12</Text>
           <Text style={{ textAlign: 'center' }}>09:24</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>Hora de Llegada</Text>
+          <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>Hora Llegada</Text>
           <Text style={{ textAlign: 'center' }}>08:10</Text>
           <Text style={{ textAlign: 'center' }}>08:40</Text>
           <Text style={{ textAlign: 'center' }}>09:18</Text>
