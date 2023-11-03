@@ -24,7 +24,7 @@ export function BoletosRuta() {
   }
 
   return (
-    <View style={general.container}>
+    <View style={general.boletosContainer}>
       <Text style={general.titleText}>Boletos</Text>
       <FlatList
         data={boletoOptions}

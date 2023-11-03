@@ -4,7 +4,7 @@ import { general } from '../styles/General';
 
 export function RegistroRuta() {
   return (
-    <View style={general.container}>
+    <View style={general.pantallaCambianteContainer}>
       <Text style={general.titleText}>Registro de ruta</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 }}>
         <View style={{ flex: 1 }}>
