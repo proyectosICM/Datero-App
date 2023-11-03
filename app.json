@@ -15,14 +15,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": "AIzaSyBpTqH6b1aeVn6VTSjlE5BIAwoTzkIe9wo"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.eduardoaguilar.dateroapp"
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBpTqH6b1aeVn6VTSjlE5BIAwoTzkIe9wo"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
