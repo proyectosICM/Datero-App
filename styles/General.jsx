@@ -25,18 +25,19 @@ export const general = StyleSheet.create({
   },
   boton: {
     flex: 1, // Ocupa todo el espacio horizontal disponible
-    backgroundColor: 'blue',
+    backgroundColor: 'green',
     height: "100%",
+    textAlign: "center",
+    justifyContent:"center",  
+    alignItems: 'center', 
   },
 
   //PantallaCambiante
   pantallaCambianteContainer: {
     flex: 1,
-    width: '100%', // Ocupa todo el ancho de la pantalla
-    borderWidth: 2,
-    borderColor: 'blue',
-    alignItems: 'center', // Centra los elementos en el eje horizontal
-    justifyContent: 'center', // Centra los elementos en el eje vertical
+    width: '100%', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
   },
 
   panel:{
@@ -49,9 +50,7 @@ export const general = StyleSheet.create({
   boletosContainer: {
     flex: 1,
     width: "50%",
-    borderWidth: 2,
-    borderColor: "red",
-    borderColor: "red",
+
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 2,
