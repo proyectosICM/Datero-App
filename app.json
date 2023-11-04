@@ -29,7 +29,8 @@
         "googleMaps": {
           "apiKey": "AIzaSyBpTqH6b1aeVn6VTSjlE5BIAwoTzkIe9wo"
         }
-      }
+      },
+      "package": "com.eduardoaguilar.dateroapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
