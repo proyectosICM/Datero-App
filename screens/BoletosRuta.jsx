@@ -1,58 +1,58 @@
-import React, { useState } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
-  Modal,
-} from 'react-native';
+import React, { useState } from "react";
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView, TextInput, Modal } from "react-native";
+import { useListarElementos } from "../Hooks/CRUDHooks";
+import { boletoxruta } from "../API/apiurls";
 
 export function BoletosRuta() {
   const boletoOptions = [
-    { title: 'Escolar', price: 0.5 },
-    { title: 'Medio', price: 1.5 },
-    { title: 'Zonal', price: 1.5 },
-    { title: 'Urbano', price: 2.0 },
-    { title: 'Completo', price: 3.0 },
-    { title: 'Colocar Monto', price: 0.0 },
+    { title: "Escolar", price: 0.5 },
+    { title: "Medio", price: 1.5 },
+    { title: "Zonal", price: 1.5 },
+    { title: "Urbano", price: 2.0 },
+    { title: "Completo", price: 3.0 },
+    { title: "Colocar Monto", price: 0.0 },
   ];
 
-  const [monto, setMonto] = useState('');
-  const [customInputText, setCustomInputText] = useState('');
+  const [monto, setMonto] = useState("");
+  const [customInputText, setCustomInputText] = useState("");
   const [isCustomInputVisible, setCustomInputVisible] = useState(false);
 
+  const [datos, setDatos] = useState("");
+  const idemp = 19;
+  const idruta = 2;
+
+  useListarElementos(`${boletoxruta}${idemp}/${idruta}`, setDatos);
+
   const handleBoletoPress = (title, price) => {
-    if (title === 'Colocar Monto') {
+    if (title === "Colocar Monto") {
       // Mostrar el campo de entrada de texto personalizado
       setCustomInputVisible(true);
     } else {
-      console.log(`Boleto seleccionado: ${title} - Precio: $${price.toFixed(2)}`);
-      setMonto(`$${price.toFixed(2)}`);
+      console.log(`Boleto seleccionado: ${title} - Precio: $${price}`);
+      setMonto(`$${price}`);
     }
   };
 
   const handleCustomInputSubmit = () => {
     // Maneja la entrada de texto personalizada y oculta el campo de entrada
-    console.log('Texto ingresado personalizado:', customInputText);
-    setMonto(`$${customInputText}`)
+    console.log("Texto ingresado personalizado:", customInputText);
+    setMonto(`$${customInputText}`);
     setCustomInputVisible(false);
-    setCustomInputText('');
+    setCustomInputText("");
   };
 
   const handleCancelCustomInput = () => {
     // Maneja el botón "Cancelar" y oculta el campo de entrada
-    setCustomInputText(''); // Limpia el texto ingresado
+    setCustomInputText(""); // Limpia el texto ingresado
     setCustomInputVisible(false);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Boletos</Text>
-      <ScrollView style={{ height: '100%' }}>
+      <ScrollView style={{ height: "100%" }}>
         <View style={styles.boletosContainer}>
-          {boletoOptions.map((item, index) => (
+          {/*boletoOptions.map((item, index) => (
             <TouchableOpacity
               style={styles.caja}
               key={index}
@@ -61,29 +61,26 @@ export function BoletosRuta() {
               <Text style={styles.textoBoleto}>{item.title}</Text>
               <Text style={styles.textoBoleto}>${item.price.toFixed(2)}</Text>
             </TouchableOpacity>
-          ))}
+          ))*/}
+          {datos &&
+            datos.map((dato, index) => (
+              <TouchableOpacity style={styles.caja} key={index} onPress={() => handleBoletoPress(dato.nombre, dato.valor)}>
+                <Text style={styles.textoBoleto}>{dato.nombre}</Text>
+                <Text style={styles.textoBoleto}>${dato.valor}</Text>
+              </TouchableOpacity>
+            ))}
         </View>
       </ScrollView>
       <Text style={styles.montoText}>{monto}</Text>
       <Modal visible={isCustomInputVisible} animationType="slide">
         <View style={styles.modalContainer}>
           <Text>Ingrese un texto personalizado:</Text>
-          <TextInput
-            style={styles.customTextInput}
-            onChangeText={(text) => setCustomInputText(text)}
-            value={customInputText}
-          />
+          <TextInput style={styles.customTextInput} onChangeText={(text) => setCustomInputText(text)} value={customInputText} />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.customButton}
-              onPress={handleCustomInputSubmit}
-            >
+            <TouchableOpacity style={styles.customButton} onPress={handleCustomInputSubmit}>
               <Text style={styles.buttonText}>Aceptar</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.customButton}
-              onPress={handleCancelCustomInput}
-            >
+            <TouchableOpacity style={styles.customButton} onPress={handleCancelCustomInput}>
               <Text style={styles.buttonText}>Cancelar</Text>
             </TouchableOpacity>
           </View>
@@ -96,29 +93,29 @@ export function BoletosRuta() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   titleText: {
     fontSize: 24,
-    textAlign: 'center',
+    textAlign: "center",
   },
   boletosContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    width: '100%',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    width: "100%",
     height: 400,
   },
   caja: {
-    width: '40%',
-    height: '22%',
-    backgroundColor: '#ede3b4',
+    width: "40%",
+    height: "22%",
+    backgroundColor: "#ede3b4",
     borderRadius: 10,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10,
   },
   textoBoleto: {
@@ -126,33 +123,33 @@ const styles = StyleSheet.create({
   },
   montoText: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   customTextInput: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     padding: 10,
-    width: '80%',
+    width: "80%",
     marginBottom: 10,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '80%',
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "80%",
   },
   customButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: "#007BFF",
     padding: 10,
     borderRadius: 5,
     width: "40%",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
-    color: 'white',
+    color: "white",
   },
 });
