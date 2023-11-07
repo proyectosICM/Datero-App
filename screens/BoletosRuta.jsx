@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView, TextInput, Modal } from "react-native";
-import { useListarElementos } from "../Hooks/CRUDHooks";
-import { boletoxruta } from "../API/apiurls";
+import { agregarElemento, useListarElementos } from "../Hooks/CRUDHooks";
+import { boletoxruta, conteoxaumentar } from "../API/apiurls";
 
 export function BoletosRuta() {
   const boletoOptions = [
@@ -16,20 +16,36 @@ export function BoletosRuta() {
   const [monto, setMonto] = useState("");
   const [customInputText, setCustomInputText] = useState("");
   const [isCustomInputVisible, setCustomInputVisible] = useState(false);
+  const [selectedBoletoId, setSelectedBoletoId] = useState(null);
+
 
   const [datos, setDatos] = useState("");
   const idemp = 19;
   const idruta = 2;
-
   useListarElementos(`${boletoxruta}${idemp}/${idruta}`, setDatos);
 
-  const handleBoletoPress = (title, price) => {
-    if (title === "Colocar Monto") {
+  const handleBoletoPress = (idboleto, title, price) => {
+    if (title === "Ingresar Valor") {
       // Mostrar el campo de entrada de texto personalizado
+      setSelectedBoletoId(idboleto)
       setCustomInputVisible(true);
     } else {
       console.log(`Boleto seleccionado: ${title} - Precio: $${price}`);
       setMonto(`$${price}`);
+      const requestData = {
+        boletosModel: {
+          id: idboleto,
+        },
+        empresasModel: {
+          id: 19,
+        },
+        busesModel: {
+          id: 1,
+        },
+        totalAcumulado: price,
+      };
+
+      agregarElemento(`${conteoxaumentar}`, requestData);
     }
   };
 
@@ -39,6 +55,21 @@ export function BoletosRuta() {
     setMonto(`$${customInputText}`);
     setCustomInputVisible(false);
     setCustomInputText("");
+
+    const requestData = {
+      boletosModel: {
+        id: selectedBoletoId,
+      },
+      empresasModel: {
+        id: 19,
+      },
+      busesModel: {
+        id: 1,
+      },
+      totalAcumulado: customInputText,
+    };
+
+    agregarElemento(`${conteoxaumentar}`, requestData);
   };
 
   const handleCancelCustomInput = () => {
@@ -64,7 +95,7 @@ export function BoletosRuta() {
           ))*/}
           {datos &&
             datos.map((dato, index) => (
-              <TouchableOpacity style={styles.caja} key={index} onPress={() => handleBoletoPress(dato.nombre, dato.valor)}>
+              <TouchableOpacity style={styles.caja} key={index} onPress={() => handleBoletoPress(dato.id, dato.nombre, dato.valor)}>
                 <Text style={styles.textoBoleto}>{dato.nombre}</Text>
                 <Text style={styles.textoBoleto}>${dato.valor}</Text>
               </TouchableOpacity>
