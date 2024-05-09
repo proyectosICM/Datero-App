@@ -26,9 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyBpTqH6b1aeVn6VTSjlE5BIAwoTzkIe9wo"
-        }
+        "cleartext": true
       },
       "package": "com.eduardoaguilar.dateroapp"
     },

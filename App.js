@@ -25,3 +25,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+/* 
+
+ "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBpTqH6b1aeVn6VTSjlE5BIAwoTzkIe9wo"
+        }
+      }
+      */
